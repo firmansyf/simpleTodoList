@@ -1,5 +1,9 @@
 import "./App.css";
 import { useState } from "react";
+import Add from "./assets/plus.png";
+import Trash from "./assets/trash.png";
+import dark from "./assets/sun.png";
+import sun from "./assets/sun-1.png";
 
 const Mode = () => {
   const handleClick = () => {
@@ -11,21 +15,32 @@ const Mode = () => {
 
     // console.log(nameMode);
     if (mode2) {
-      return (nameMode.innerHTML = "Light");
+      return (nameMode.innerHTML = `<img src=${sun} />`);
     } else {
-      return (nameMode.innerHTML = "Dark");
+      return (nameMode.innerHTML = `<img src=${dark} />`);
     }
   };
 
   return (
     <div className="mode" onClick={handleClick}>
-      <p className="nameMode">Dark</p>
+      <p className="nameMode">
+        <img src={dark} alt="drakmode" />
+      </p>
     </div>
   );
 };
 
-const Header = ({ title }) => {
-  return <h1 className="header"> {title} </h1>;
+const Header = () => {
+  const nama = prompt("your name?");
+
+  return (
+    <h1 className="header">
+      {" "}
+      {nama
+        ? `Apa yang ingin anda lakukan ${nama} ?`
+        : "Apa yang ingin anda lakukan"}{" "}
+    </h1>
+  );
 };
 
 const TasksApp = () => {
@@ -61,7 +76,10 @@ const TasksApp = () => {
             setValue(e.target.value);
           }}
         />
-        <button> Tambah </button>
+        <button>
+          {" "}
+          <img src={Add} width={45} alt="Add" />{" "}
+        </button>
       </form>
       {items.map((item, index) => {
         return (
@@ -78,7 +96,7 @@ const TasksApp = () => {
                 }
               >
                 {" "}
-                Clear
+                <img src={Trash} width={25} alt="Trash" />
               </button>
             </div>
           </>
@@ -92,7 +110,7 @@ function App() {
   return (
     <div>
       <div className="App">
-        <Header title="Apa yang ingin anda lakukan ?" />
+        <Header />
         <TasksApp />
         <Mode />
       </div>
